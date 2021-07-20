@@ -56,6 +56,11 @@ class Handler {
       $iterator = $iterator->depth('> 0');
     }
 
+    $extra = $this->composer->getPackage()->getExtra();
+    if (isset($extra['cleanup-vcs-dirs']) && isset($extra['cleanup-vcs-dirs']['exclude'])) {
+      $iterator->exclude($extra['cleanup-vcs-dirs']['exclude']);
+    }
+
     return $iterator;
   }
 
